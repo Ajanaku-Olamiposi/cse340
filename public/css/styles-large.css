@@ -1,0 +1,58 @@
+@media screen and (min-width: 768px){
+    body{
+        position: relative;
+        line-height: normal;
+    }
+    .check{
+        display: flex;
+        width: 100%;
+        height: 1000px;
+    }
+    #wrapper{
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: white;
+        border: 4px solid rgb(18, 158, 214);
+        margin: 0px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        width: 70%;
+    }
+    header{
+        padding-top: 10px;
+    }
+    footer{
+        padding-bottom: 10px;
+    }
+    section{
+        display: flex;
+        flex-direction: row-reverse;
+        gap: 70px;
+    }
+  
+    .offer, section{
+        justify-self: center;
+    }
+    main li{
+        padding-bottom: 15px;
+    }
+}
+@media screen and (min-width: 480px){
+    .offer-info{
+        /* top: 10px; */
+        justify-content: space-between;
+        height: 80%;
+    }
+    .offer-info p{
+        padding-top: 20px;
+        font-size: 1.4rem;
+        align-self: center;
+    }
+    .offer-info img{
+        width: 100%;
+        padding-left: 20px;
+        padding-right: 20px;  
+    }
+}
