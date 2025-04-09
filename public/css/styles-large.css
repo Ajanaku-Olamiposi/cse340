@@ -16,9 +16,9 @@
         background-color: white;
         border: 4px solid rgb(18, 158, 214);
         margin: 0px;
-        margin-top: 20px;
-        margin-bottom: 20px;
-        width: 70%;
+        margin-top: 10px;
+        /* margin-bottom: 20px; */
+        width: 90%;
     }
     header{
         padding-top: 10px;
@@ -38,6 +38,23 @@
     main li{
         padding-bottom: 15px;
     }
+    /* classification view body */
+    #inv-display{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 15px;
+    }
+    /* single-display view */
+    #single-display div{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    /* single-display view */
+    #single-display section{
+        display: flex;
+        flex-direction: column;
+        gap: 0px;
+    }
 }
 @media screen and (min-width: 480px){
     .offer-info{
@@ -54,5 +71,10 @@
         width: 100%;
         padding-left: 20px;
         padding-right: 20px;  
+    }
+}
+@media screen and (min-width: 1025px){
+    #wrapper{
+        width: 70%;
     }
 }

@@ -73,6 +73,51 @@ main ul{
 figcaption a{
   color: #F5F5F5;
 }
+
+/* classification view body */
+#inv-display{
+  display: grid;
+  gap: 15px;
+  text-align: center;
+  justify-self: center;
+}
+#inv-display li{
+  list-style-type: none;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+@media (max-width: 600px){
+  #inv-display li{
+  width: 350px;
+  }
+}
+#inv-display hr{
+  border: 2px solid black;
+}
+#inv-display img{
+  margin-top: 15px;
+}
+.level{
+  height: 200px;
+}
+.namePrice a{
+  color: blue;
+}
+
+/* single-display view */
+#single-display{
+  display: grid;
+}
+#single-display img{
+  justify-self: center;
+  width: 100%;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+#single-display p{
+  margin-left: 10px;
+  margin-right: 10px;
+}
 /* Header */
 header{
   display: flex;
@@ -93,11 +138,14 @@ header{
 nav ul{
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   list-style-type: none;
   background-color: rgb(27, 27, 61);
-  color: white;
   padding: 10px;
+}
+nav a{
+  color: white;
+  text-decoration: none;
 }
 /* Footer */
 footer{
