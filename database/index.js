@@ -1,4 +1,4 @@
-const { Pool } = require("pg"); // Fix import of 'Pool'
+const { Pool } = require("pg");
 require("dotenv").config();
 
 /* ***************
@@ -13,7 +13,7 @@ if (process.env.NODE_ENV === "development") {
     pool = new Pool({
         connectionString: process.env.DATABASE_URL,
         ssl: {
-            rejectUnauthorized: false,
+            rejectUnauthorized: false, // Allows self-signed certificates in development
         },
     });
 
@@ -33,6 +33,9 @@ if (process.env.NODE_ENV === "development") {
 } else {
     pool = new Pool({
         connectionString: process.env.DATABASE_URL,
+        ssl: {
+            rejectUnauthorized: false, // Ensure proper SSL connection in production
+        },
     });
 
     module.exports = pool;
