@@ -1,0 +1,26 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+    } %>
+  <%- messages() %>
+  <% if (errors) { %>
+    <ul class="notice">
+   <% errors.array().forEach(error => { %>
+     <li><%= error.msg %></li>
+  <%  }) %>
+   </ul>
+  <% } %>
+  <form action="/inv/delClassification" method="POST">
+      <P>Classification name must not contain spaces or special characters.</P>
+      <label for="classificationName">Classification Name:</label>
+      <input
+        type="text"
+        id="classificationName"
+        name="classification_name"
+        pattern="^[a-zA-Z0-9]+$"
+        title="Classification name must not contain spaces or special characters."
+        required
+      />
+      <button type="submit">Delete Classification</button>
+  </form>

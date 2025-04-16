@@ -1,0 +1,133 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+    } %>
+  <%- messages() %>
+  <% if (errors) { %>
+    <ul class="notice">
+   <% errors.array().forEach(error => { %>
+     <li><%= error.msg %></li>
+  <%  }) %>
+   </ul>
+  <% } %>
+<form action="/inv/update" method="post" id="updateForm">
+    <!-- Classification Dropdown -->
+    <label for="classificationList">Classification:</label>
+    <%- classificationSelect %>
+
+    <!-- Make Input -->
+    <label for="inv_make">Make:</label>
+    <input
+      type="text"
+      id="inv_make"
+      name="inv_make"
+      required
+      data-trail="inv_make"
+      value="<%= locals.inv_make %>"
+      pattern="^[a-zA-Z ]+$"
+      title="Only alphabetic characters and spaces are allowed."
+    />
+
+    <!-- Model Input -->
+    <label for="inv_model">Model:</label>
+    <input
+      type="text"
+      id="inv_model"
+      name="inv_model"
+      required
+      data-trail="inv_model"
+      value="<%= locals.inv_model %>"
+      pattern="^[a-zA-Z ]+$"
+      title="Only alphabetic characters and spaces are allowed."
+    />
+
+    <label for="inv_description">Description:</label>
+    <textarea
+    id="inv_description"
+    name="inv_description"
+    required
+    data-trail="description"
+    title="Provide a detailed description of the vehicle."
+    ><%= locals.inv_description || '' %></textarea>
+
+    <!-- Year Input -->
+    <label for="inv_year">Year:</label>
+    <input
+      type="number"
+      id="inv_year"
+      name="inv_year"
+      required
+      data-trail="inv_year"
+      value="<%= locals.inv_year %>"
+      min="1900"
+      max="<%= new Date().getFullYear() %>"
+    />
+
+    <!-- Price Input -->
+    <label for="inv_price">Price:</label>
+    <input
+      type="number"
+      id="inv_price"
+      name="inv_price"
+      required
+      data-trail="inv_price"
+      value="<%= locals.inv_price %>"
+      min="0"
+      step="0.01"
+    />
+
+    <!-- Miles Input -->
+    <label for="inv_miles">Miles:</label>
+    <input
+      type="number"
+      id="inv_miles"
+      name="inv_miles"
+      required
+      data-trail="inv_miles"
+      value="<%= locals.inv_miles %>"
+      min="0"
+    />
+
+    <!-- Color Input -->
+    <label for="inv_color">Color:</label>
+    <input
+      type="text"
+      id="inv_color"
+      name="inv_color"
+      required
+      data-trail="inv_color"
+      value="<%= locals.inv_color %>"
+      pattern="^[a-zA-Z]+$"
+      title="Only alphabetic characters are allowed."
+    />
+
+    <!-- Image Path -->
+    <label for="inv_image">Image Path:</label>
+    <input
+      type="text"
+      id="inv_image"
+      name="inv_image"
+      required
+      data-trail="inv_image"
+      value="<%- locals.inv_image || '/images/no-image.png' %>"
+    />
+
+    <!-- Thumbnail Path -->
+    <label for="inv_thumbnail">Thumbnail Path:</label>
+    <input
+      type="text"
+      id="inv_thumbnail"
+      name="inv_thumbnail"
+      required
+      data-trail="inv_thumbnail"
+      value="<%- locals.inv_thumbnail || '/images/no-image-thumbnail.png' %>"
+    />
+
+    <button type="submit" disabled>Update Vehicle</button>
+    <input type="hidden" name="inv_id"
+<% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+<% } %>>
+<script src="../../js/inv_update.js"></script>
+
+</form>

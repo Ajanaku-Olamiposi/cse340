@@ -1,0 +1,77 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+    } %>
+    <%- messages() %>
+    <% if (errors) { %>
+        <ul class="notice">
+       <% errors.array().forEach(error => { %>
+         <li><%= error.msg %></li>
+      <%  }) %>
+       </ul>
+      <% } %>
+<!-- Account Update Form -->
+<form action="/account/update" method="POST">
+    <!-- First Name -->
+    <label for="account_firstname">First Name:</label>
+    <input
+      type="text"
+      id="account_firstname"
+      name="account_firstname"
+      value="<%= accountData.account_firstname %>"
+      required
+    />
+  
+    <!-- Last Name -->
+    <label for="account_lastname">Last Name:</label>
+    <input
+      type="text"
+      id="account_lastname"
+      name="account_lastname"
+      value="<%= accountData.account_lastname %>"
+      required
+    />
+  
+    <!-- Email -->
+    <label for="account_email">Email:</label>
+    <input
+      type="email"
+      id="account_email"
+      name="account_email"
+      value="<%= accountData.account_email %>"
+      required
+    />
+  
+    <!-- Hidden Account ID -->
+    <input type="hidden" name="account_id" value="<%= accountData.account_id %>" />
+  
+    <input type="submit" value="Update Account">
+  </form>
+<!-- Change Password Form -->
+<form action="/account/update-password" method="POST" novalidate>
+    <fieldset>
+        <legend>Change Password</legend>
+        <p>Please enter a new password. It must be at least 12 characters long, with one uppercase letter, one lowercase letter, one number, and one special character.</p>
+        
+        <!-- New Password -->
+        <label for="account_password">New Password:</label>
+        <input 
+            type="password" 
+            id="account_password" 
+            name="account_password" 
+            required 
+            pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$" 
+            title="Password must meet the complexity requirements."
+        >
+
+        <!-- Account ID -->
+        <input 
+            type="hidden" 
+            name="account_id" 
+            value="<%= accountData.account_id %>"
+        >
+
+        <input type="submit" value="Change Password">
+    </fieldset>
+</form>

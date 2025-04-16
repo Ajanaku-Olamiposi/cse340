@@ -1,0 +1,77 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+    } %>
+  <%- messages() %>
+  <% if (errors) { %>
+    <ul class="notice">
+   <% errors.array().forEach(error => { %>
+     <li><%= error.msg %></li>
+  <%  }) %>
+   </ul>
+  <% } %>
+<p>Confirm Deletion - The delete is permanent.</p>
+<form action="/inv/delete" method="post" id="deleteForm">
+    <!-- Make Input -->
+    <label for="inv_make">Make:</label>
+    <input
+      type="text"
+      id="inv_make"
+      name="inv_make"
+      required
+      data-trail="inv_make"
+      value="<%= locals.inv_make %>"
+      pattern="^[a-zA-Z ]+$"
+      title="Only alphabetic characters and spaces are allowed."
+      readonly
+    />
+
+    <!-- Model Input -->
+    <label for="inv_model">Model:</label>
+    <input
+      type="text"
+      id="inv_model"
+      name="inv_model"
+      required
+      data-trail="inv_model"
+      value="<%= locals.inv_model %>"
+      pattern="^[a-zA-Z ]+$"
+      title="Only alphabetic characters and spaces are allowed."
+      readonly
+    />
+
+    <!-- Year Input -->
+    <label for="inv_year">Year:</label>
+    <input
+      type="number"
+      id="inv_year"
+      name="inv_year"
+      required
+      data-trail="inv_year"
+      value="<%= locals.inv_year %>"
+      min="1900"
+      max="<%= new Date().getFullYear() %>"
+      readonly
+    />
+
+    <!-- Price Input -->
+    <label for="inv_price">Price:</label>
+    <input
+      type="number"
+      id="inv_price"
+      name="inv_price"
+      required
+      data-trail="inv_price"
+      value="<%= locals.inv_price %>"
+      min="0"
+      step="0.01"
+      readonly
+    />
+
+    <button type="submit">Delete Vehicle</button>
+    <input type="hidden" name="inv_id"
+<% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+<% } %>>
+
+</form>

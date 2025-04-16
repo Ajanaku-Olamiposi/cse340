@@ -1,0 +1,14 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+    } %>
+<%- messages() %>
+<h2>Welcome <%= firstName %></h2>
+
+<% if (accountType === "Employee" || accountType === "Admin") { %>
+    <h3>Inventory Management</h3>
+    <p><a href="/inv">Go to Inventory Management</a></p>
+<% } %>
+
+<p><a href="/account/update/<%= accountId %>">Update Account Information</a></p>

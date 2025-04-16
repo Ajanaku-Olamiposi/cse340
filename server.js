@@ -1,4 +1,3 @@
-const utilities = require("./utilities/");
 /* ******************************************
  * This server.js file is the primary file of the 
  * application. It is used to control the project.
@@ -13,9 +12,40 @@ const app = express()
 const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
 const inventoryRoute = require("./routes/inventoryRoute")
+const accountRoute = require("./routes/accountRoute")
 const invController = require("./controllers/invController")
-
-
+const utilities = require("./utilities/");
+const session = require("express-session")
+const pool = require('./database/')
+const bodyParser = require("body-parser")
+const cookieParser = require("cookie-parser")
+/* ***********************
+ * Middleware
+ * ************************/
+app.use(session({
+  store: new (require('connect-pg-simple')(session))({
+    createTableIfMissing: true,
+    pool,
+  }),
+  secret: process.env.SESSION_SECRET,
+  resave: true,
+  saveUninitialized: true,
+  name: 'sessionId',
+}))
+app.use((req, res, next) => {
+  res.locals.clientLoggedIn = req.session.clientLoggedIn || false;
+  next();
+});
+// Express Messages Middleware
+app.use(require('connect-flash')())
+app.use(function(req, res, next){
+  res.locals.messages = require('express-messages')(req, res)
+  next()
+})
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+app.use(cookieParser())
+app.use(utilities.checkJWTToken)
 /* ***********************
  * View Engine and Templates
  *************************/
@@ -35,7 +65,7 @@ app.get("/inv/detail/:inv_id", utilities.handleErrors(invController.buildSingleV
 app.get("/trigger-error", utilities.handleErrors(invController.triggerError));
 // Middleware for handling inventory logic
 app.use("/inv", inventoryRoute);
-
+app.use("/account", accountRoute)
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
   next({status: 404, message: 'Sorry, we appear to have lost that page.'})
